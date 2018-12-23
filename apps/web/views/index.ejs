@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Asciifier</title>
+  </head>
+  <body>
+    <div class="jumbotron">
+      <h1 class="display-4">Asciifier</h1>
+      <p class="lead">Convert any image from the web to ASCII art!</p>
+      <hr class="my-4">
+      <form>
+        <div class="form-group">
+          <label for="imageURL">Enter image url then hit submit to render the art</label>
+          <input type="text" class="form-control" id="imageURL" placeholder="Image URL">
+          <small class="form-text text-muted">We'll never share image url you asciify to anyone else ;)</small>
+        </div>
+        <button id="asciify" type="button" class="btn btn-primary">Asciify Image</button>
+      </form>
+      <div class="text-monospace">
+        <pre id="asciiResult"></pre>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script>
+      $('#asciify').on('click', function () {
+        var $btn = $(this).button('loading');
+        var imageUrl = $("#imageURL").val().trim();
+        var requestUrl = 'asciify/' + encodeURIComponent(imageUrl);
+        jQuery.getJSON(requestUrl, function(data) {
+          if (data.error) {
+            $("#asciiResult")
+              .text(data.result)
+              .removeClass('bg-dark')
+              .addClass('text-danger');
+          }
+          console.log(data);
+          $("#asciiResult")
+            .html(data.result)
+            .addClass('bg-dark');
+
+          $btn.button('reset')
+        });
+      });
+    </script>
+  </body>
+</html>

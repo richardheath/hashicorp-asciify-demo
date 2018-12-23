@@ -1,0 +1,21 @@
+{
+  "name": "asciifier-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ansi-to-html": "^0.6.8",
+    "ascii-art": "^1.5.0",
+    "canvas": "^2.0.1",
+    "download-file": "^0.1.5",
+    "express": "^4.16.4",
+    "mysql": "^2.16.0",
+    "uuid": "^3.3.2"
+  }
+}
